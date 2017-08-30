@@ -18,7 +18,7 @@ namespace NET.Workshop.PortfolioManager.Controllers
         // GET: api/Default/5
         public string Get(int id)
         {
-            return "value";
+            return "value23";
         }
 
         // POST: api/Default
