@@ -55,23 +55,23 @@ namespace NET.Workshop.PortfolioManager.Services
         /// </summary>
         /// <param name="userId">The User Id.</param>
         /// <returns>The list of portfolio items.</returns>
-        public List<PortfolioItemViewModel> GetItems(int userId)
+        public List<PortfolioItemModel> GetItems(int userId)
         {
             var dataAsString = _httpClient.GetStringAsync(string.Format(_serviceApiUrl + GetUrl, userId)).Result;
-            return JsonConvert.DeserializeObject<List<PortfolioItemViewModel>>(dataAsString);
+            return JsonConvert.DeserializeObject<List<PortfolioItemModel>>(dataAsString);
         }
 
-        public List<PortfolioItemViewModel> GetItems()
+        public List<PortfolioItemModel> GetItems()
         {
             var dataAsString = _httpClient.GetStringAsync(string.Format(_serviceApiUrl + GetAllUrl)).Result;
-            return JsonConvert.DeserializeObject<List<PortfolioItemViewModel>>(dataAsString);
+            return JsonConvert.DeserializeObject<List<PortfolioItemModel>>(dataAsString);
         }
 
         /// <summary>
         /// Creates a portfolio item. UserId is taken from the model.
         /// </summary>
         /// <param name="item">The portfolio item to create.</param>
-        public void CreateItem(PortfolioItemViewModel item)
+        public void CreateItem(PortfolioItemModel item)
         {
             _httpClient.PostAsJsonAsync(_serviceApiUrl + CreateUrl, item)
                 .Result.EnsureSuccessStatusCode();
@@ -81,7 +81,7 @@ namespace NET.Workshop.PortfolioManager.Services
         /// Updates a portfolio item.
         /// </summary>
         /// <param name="item">The portfolio item to update.</param>
-        public void UpdateItem(PortfolioItemViewModel item)
+        public void UpdateItem(PortfolioItemModel item)
         {
             _httpClient.PutAsJsonAsync(_serviceApiUrl + UpdateUrl, item)
                 .Result.EnsureSuccessStatusCode();

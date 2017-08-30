@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using static NET.Workshop.PortfolioManager.Models.PortfolioItemViewModel;
+using NET.Workshop.PortfolioManager.Infrastructure;
+
 
 namespace NET.Workshop.PortfolioManager.Services
 {
@@ -28,12 +31,12 @@ namespace NET.Workshop.PortfolioManager.Services
 
         public List<PortfolioItemViewModel> GetContacts(int userId)
         {
-            return Instance.portfolioItems.FindAll(p => p.UserId == userId);
+            return Instance.portfolioItems.FindAll(p => (p.UserId == userId) && (p.Status != PortfolioItemStatus.Delete));
         }
 
         public void UpdateUserPortfolio(int userId)
         {
-            _instance.Value.portfolioItems.AddRange(_portfolioItemsService.GetItems(userId));
+            _instance.Value.portfolioItems.AddRange(_portfolioItemsService.GetItems(userId).Select(i => i.ToStoragePortfolioItem()));
         }
 
         public int GetContactsCount()
@@ -47,6 +50,8 @@ namespace NET.Workshop.PortfolioManager.Services
             {
                 throw new ArgumentNullException("newContact");
             }
+            item.Status = PortfolioItemStatus.Add;
+            item.LocalItemId = Guid.NewGuid().GetHashCode();
             Instance.portfolioItems.Add(item);
             return item;
         }
@@ -62,6 +67,7 @@ namespace NET.Workshop.PortfolioManager.Services
             {
                 return false;
             }
+            item.Status = PortfolioItemStatus.Update;
             Instance.portfolioItems.RemoveAt(index);
             Instance.portfolioItems.Add(item);
             return true;
@@ -69,7 +75,58 @@ namespace NET.Workshop.PortfolioManager.Services
 
         public void Remove(int id)
         {
-            Instance.portfolioItems.RemoveAll(p => p.ItemId == id);
+            var item = portfolioItems.Find(e => e.LocalItemId == id);
+            item.Status = PortfolioItemStatus.Delete;
+
+        }
+
+        public void Synchronize()
+        {
+            var users = UserStorage.Instance.GetUsers();
+
+            foreach (UserViewModel user in users)
+            {
+                IList<PortfolioItemViewModel> bufferStorage = PortfolioItemsStorage.Instance.GetContacts(user.Id);
+
+
+                foreach (var item in bufferStorage)
+                {
+                    switch (item.Status)
+                    {
+                        case PortfolioItemStatus.Add:
+                            _portfolioItemsService.CreateItem(item.ToModelPortfolioItem());
+                            item.Status = PortfolioItemStatus.None;
+                            break;
+                        case PortfolioItemStatus.Update:
+                            _portfolioItemsService.UpdateItem(item.ToModelPortfolioItem());
+                            item.Status = PortfolioItemStatus.None;
+                            break;
+                        case PortfolioItemStatus.Delete:
+                            if (item.ItemId == 0)
+                                break;
+                            _portfolioItemsService.DeleteItem(item.ItemId);
+                            portfolioItems.Remove(item);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private class PortfolioItemViewModelComparer : IEqualityComparer<PortfolioItemViewModel>
+        {
+            public bool Equals(PortfolioItemViewModel x, PortfolioItemViewModel y)
+            {
+                if ((x.SharesNumber == y.SharesNumber) && (x.Symbol == y.Symbol) && (x.UserId == y.UserId))
+                {
+                    return true;
+                }
+                return false;
+            }
+
+            public int GetHashCode(PortfolioItemViewModel obj)
+            {
+                return obj.UserId.GetHashCode();
+            }
         }
     }
 }

@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentScheduler, Version=5.3.0.0, Culture=neutral, PublicKeyToken=b76503528a14ebd1, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentScheduler.5.3.0\lib\net40\FluentScheduler.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -127,6 +130,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\PortfolioItemMapper.cs" />
+    <Compile Include="Models\PortfolioItemModel.cs" />
     <Compile Include="Models\PortfolioItemViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +139,8 @@
     <Compile Include="Services\PortfolioItemsStorage.cs" />
     <Compile Include="Services\UsersService.cs" />
     <Compile Include="Services\UserStorage.cs" />
+    <Compile Include="Synchronization\SchedulerRegistry.cs" />
+    <Compile Include="Synchronization\SyncJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

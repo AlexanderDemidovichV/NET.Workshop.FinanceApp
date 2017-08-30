@@ -39,3 +39,9 @@ C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\b
 C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\obj\Debug\NET.Workshop.PortfolioManager.dll
 C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\obj\Debug\NET.Workshop.PortfolioManager.pdb
 C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\obj\Debug\NET.Workshop.PortfolioManager.csprojResolveAssemblyReference.cache
+C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\FluentScheduler.dll
+C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\FluentScheduler.pdb
+C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\FluentScheduler.xml
+C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\ru\System.Net.Http.Formatting.resources.dll
+C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\ru\System.Web.Http.resources.dll
+C:\Users\Dell-PC\Desktop\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\ru\System.Web.Http.WebHost.resources.dll

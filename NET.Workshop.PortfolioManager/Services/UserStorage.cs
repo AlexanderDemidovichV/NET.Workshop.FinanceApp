@@ -36,5 +36,10 @@ namespace NET.Workshop.PortfolioManager.Services
                 return false;
             return true;
         }
+
+        public List<UserViewModel> GetUsers()
+        {
+            return new List<UserViewModel>(users);
+        }
     }
 }
