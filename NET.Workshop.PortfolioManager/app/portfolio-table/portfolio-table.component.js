@@ -36,7 +36,7 @@
         };
 
         function deleteDocument(item){
-            PortfolioService.delete({Id: item.Id});
+            PortfolioService.delete({Id: item.LocalItemId});
 
         }
 
