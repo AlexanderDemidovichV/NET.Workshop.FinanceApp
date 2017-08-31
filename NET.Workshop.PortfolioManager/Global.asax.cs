@@ -1,4 +1,5 @@
 ﻿using FluentScheduler;
+using NET.Workshop.PortfolioManager.Services;
 using NET.Workshop.PortfolioManager.Synchronization;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace NET.Workshop.PortfolioManager
             JobManager.Initialize(new SchedulerRegistry());
         }
 
-        protected void Aplication_End()
+        protected void Application_End()
         {
-
+            PortfolioItemsStorage.Instance.Synchronize();
         }
     }
 }

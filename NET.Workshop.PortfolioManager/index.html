@@ -7,11 +7,36 @@
 
     <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="app/bower_components/angular-block-ui/dist/angular-block-ui.min.css"/>
+    <link rel="stylesheet" href="app/Styles/footer.css" />
+    <link rel="stylesheet" href="app/Styles/header.css" />
+    <link rel="stylesheet" href="app/Styles/content.css" />
 
     
 </head>
+
+
+
 <body block-ui="mainBlock" >
-    <div ui-view=""></div>
+
+    <header class="header navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse header-navbar-collapse" id="navbar-collapse-header">
+
+
+
+            </div><!-- /.navbar-collapse -->
+
+        </div><!-- /.container -->
+    </header>
+
+
+    <div class="content" ui-view=""></div>
     
 
 
@@ -35,5 +60,15 @@
     <script src="app/services/block.service.js"></script>
 
     <script src="Scripts/portfolioManager.js" language="javascript"></script>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="col-lg-12" align="center">
+                <p class="footer_copyright">Copyright: <span>Qoert</span></p>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

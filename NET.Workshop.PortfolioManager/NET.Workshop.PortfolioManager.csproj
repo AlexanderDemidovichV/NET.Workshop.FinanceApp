@@ -683,6 +683,9 @@
     <Content Include="app\services\block.service.js" />
     <Content Include="app\services\portfolio.service.js" />
     <Content Include="app\state.template\portfolio-table.state.template.html" />
+    <Content Include="app\Styles\content.css" />
+    <Content Include="app\Styles\footer.css" />
+    <Content Include="app\Styles\header.css" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
@@ -958,7 +961,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>7677</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
