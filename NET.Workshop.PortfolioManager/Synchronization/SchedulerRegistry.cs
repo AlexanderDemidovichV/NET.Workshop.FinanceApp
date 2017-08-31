@@ -13,6 +13,7 @@ namespace NET.Workshop.PortfolioManager.Synchronization
         public SchedulerRegistry()
         {
             Schedule<SyncJob>().ToRunEvery(defaultSyncTime).Seconds();
+
         }
     }
 }

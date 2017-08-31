@@ -23,10 +23,8 @@ namespace NET.Workshop.PortfolioManager.Controllers
         public IList<PortfolioItemViewModel> Get()
         {
             var userId = _usersService.GetOrCreateUser();
-            return PortfolioItemsStorage.Instance.GetContacts(userId);
+            return PortfolioItemsStorage.Instance.GetPortfolioItems(userId);
         }
-
-
 
         /// <summary>
         /// Updates the existing portfolio item.

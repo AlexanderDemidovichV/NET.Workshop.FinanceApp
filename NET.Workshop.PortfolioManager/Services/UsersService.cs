@@ -68,8 +68,6 @@ namespace NET.Workshop.PortfolioManager.Services
 
                 HttpContext.Current.Response.SetCookie(cookie);
 
-                
-
             }
 
             if (!UserStorage.Instance.IsUserExist(userId) && userCookie != null)

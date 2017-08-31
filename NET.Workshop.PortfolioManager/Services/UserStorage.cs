@@ -19,9 +19,6 @@ namespace NET.Workshop.PortfolioManager.Services
         UserStorage()
         { }
 
-        static UserStorage()
-        {
-        }
 
         public static UserStorage Instance { get { return _instance.Value; } }
 

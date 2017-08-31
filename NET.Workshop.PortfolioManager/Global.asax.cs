@@ -16,5 +16,10 @@ namespace NET.Workshop.PortfolioManager
             GlobalConfiguration.Configure(WebApiConfig.Register);
             JobManager.Initialize(new SchedulerRegistry());
         }
+
+        protected void Aplication_End()
+        {
+
+        }
     }
 }
