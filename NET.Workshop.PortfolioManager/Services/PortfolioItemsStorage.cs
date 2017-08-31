@@ -6,7 +6,7 @@ using System.Threading;
 using System.Web;
 using static NET.Workshop.PortfolioManager.Models.PortfolioItemViewModel;
 using NET.Workshop.PortfolioManager.Infrastructure;
-
+using System.Collections;
 
 namespace NET.Workshop.PortfolioManager.Services
 {
@@ -15,34 +15,27 @@ namespace NET.Workshop.PortfolioManager.Services
         private static readonly Lazy<PortfolioItemsStorage> _instance = new Lazy<PortfolioItemsStorage>(() => new PortfolioItemsStorage(), LazyThreadSafetyMode.PublicationOnly);
 
         private static PortfolioItemsService _portfolioItemsService = new PortfolioItemsService();
-        private static UsersService _usersService = new UsersService();
 
         private List<PortfolioItemViewModel> portfolioItems = new List<PortfolioItemViewModel>();
+        
 
         PortfolioItemsStorage()
         { }
 
-        static PortfolioItemsStorage()
-        {
-
-        }
 
         public static PortfolioItemsStorage Instance { get { return _instance.Value; } }
 
-        public List<PortfolioItemViewModel> GetContacts(int userId)
+        public List<PortfolioItemViewModel> GetPortfolioItems(int userId)
         {
             return Instance.portfolioItems.FindAll(p => (p.UserId == userId) && (p.Status != PortfolioItemStatus.Delete));
         }
 
         public void UpdateUserPortfolio(int userId)
         {
-            _instance.Value.portfolioItems.AddRange(_portfolioItemsService.GetItems(userId).Select(i => i.ToStoragePortfolioItem()));
+            var itemsList =  _portfolioItemsService.GetItems(userId);
+            _instance.Value.portfolioItems.AddRange(itemsList.Select(i => i.ToStoragePortfolioItem()));
         }
 
-        public int GetContactsCount()
-        {
-            return Instance.portfolioItems.Count;
-        }
 
         public PortfolioItemViewModel Add(PortfolioItemViewModel item)
         {
@@ -86,47 +79,33 @@ namespace NET.Workshop.PortfolioManager.Services
 
             foreach (UserViewModel user in users)
             {
-                IList<PortfolioItemViewModel> bufferStorage = PortfolioItemsStorage.Instance.GetContacts(user.Id);
+                var bufferList = new List<PortfolioItemViewModel>(portfolioItems);
+                portfolioItems.RemoveAll(i => i.Status == PortfolioItemStatus.Delete);
+                portfolioItems.Select(i => i.Status = PortfolioItemStatus.None);
 
-
-                foreach (var item in bufferStorage)
-                {
-                    switch (item.Status)
+                    foreach (var item in bufferList)
                     {
-                        case PortfolioItemStatus.Add:
-                            _portfolioItemsService.CreateItem(item.ToModelPortfolioItem());
-                            item.Status = PortfolioItemStatus.None;
-                            break;
-                        case PortfolioItemStatus.Update:
-                            _portfolioItemsService.UpdateItem(item.ToModelPortfolioItem());
-                            item.Status = PortfolioItemStatus.None;
-                            break;
-                        case PortfolioItemStatus.Delete:
-                            if (item.ItemId == 0)
+                        switch (item.Status)
+                        {
+                            case PortfolioItemStatus.Add:
+                                _portfolioItemsService.CreateItem(item.ToModelPortfolioItem());
+                                item.Status = PortfolioItemStatus.None;
                                 break;
-                            _portfolioItemsService.DeleteItem(item.ItemId);
-                            portfolioItems.Remove(item);
-                            break;
+                            case PortfolioItemStatus.Update:
+                                _portfolioItemsService.UpdateItem(item.ToModelPortfolioItem());
+                                item.Status = PortfolioItemStatus.None;
+                                break;
+                            case PortfolioItemStatus.Delete:
+                                if (item.ItemId == 0)
+                                    break;
+                                _portfolioItemsService.DeleteItem(item.ItemId);
+                                break;
+                        }
                     }
-                }
+                
+               
             }
         }
 
-        private class PortfolioItemViewModelComparer : IEqualityComparer<PortfolioItemViewModel>
-        {
-            public bool Equals(PortfolioItemViewModel x, PortfolioItemViewModel y)
-            {
-                if ((x.SharesNumber == y.SharesNumber) && (x.Symbol == y.Symbol) && (x.UserId == y.UserId))
-                {
-                    return true;
-                }
-                return false;
-            }
-
-            public int GetHashCode(PortfolioItemViewModel obj)
-            {
-                return obj.UserId.GetHashCode();
-            }
-        }
     }
 }

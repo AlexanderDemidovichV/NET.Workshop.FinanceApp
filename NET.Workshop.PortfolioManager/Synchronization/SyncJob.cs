@@ -29,13 +29,11 @@ namespace NET.Workshop.PortfolioManager.Synchronization
                     return;
 
                 PortfolioItemsStorage.Instance.Synchronize();
-                // Do work, son!
             }
         }
 
         public void Stop(bool immediate)
         {
-            // Locking here will wait for the lock in Execute to be released until this code can continue.
             lock (_lock)
             {
                 _shuttingDown = true;

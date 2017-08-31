@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using NET.Workshop.PortfolioManager.Models;
+using System.Threading.Tasks;
 
 namespace NET.Workshop.PortfolioManager.Services
 {
@@ -57,13 +58,7 @@ namespace NET.Workshop.PortfolioManager.Services
         /// <returns>The list of portfolio items.</returns>
         public List<PortfolioItemModel> GetItems(int userId)
         {
-            var dataAsString = _httpClient.GetStringAsync(string.Format(_serviceApiUrl + GetUrl, userId)).Result;
-            return JsonConvert.DeserializeObject<List<PortfolioItemModel>>(dataAsString);
-        }
-
-        public List<PortfolioItemModel> GetItems()
-        {
-            var dataAsString = _httpClient.GetStringAsync(string.Format(_serviceApiUrl + GetAllUrl)).Result;
+            var dataAsString =  _httpClient.GetStringAsync(string.Format(_serviceApiUrl + GetUrl, userId)).Result;
             return JsonConvert.DeserializeObject<List<PortfolioItemModel>>(dataAsString);
         }
 
@@ -73,8 +68,8 @@ namespace NET.Workshop.PortfolioManager.Services
         /// <param name="item">The portfolio item to create.</param>
         public void CreateItem(PortfolioItemModel item)
         {
-            _httpClient.PostAsJsonAsync(_serviceApiUrl + CreateUrl, item)
-                .Result.EnsureSuccessStatusCode();
+            var res =  _httpClient.PostAsJsonAsync(_serviceApiUrl + CreateUrl, item).Result;
+            res.EnsureSuccessStatusCode();
         }
 
         /// <summary>
@@ -83,18 +78,19 @@ namespace NET.Workshop.PortfolioManager.Services
         /// <param name="item">The portfolio item to update.</param>
         public void UpdateItem(PortfolioItemModel item)
         {
-            _httpClient.PutAsJsonAsync(_serviceApiUrl + UpdateUrl, item)
-                .Result.EnsureSuccessStatusCode();
+            var res =  _httpClient.PutAsJsonAsync(_serviceApiUrl + UpdateUrl, item).Result;
+            res.EnsureSuccessStatusCode();
         }
 
         /// <summary>
         /// Deletes a portfolio item.
         /// </summary>
         /// <param name="id">The portfolio item Id to delete.</param>
-        public void DeleteItem(int id)
+        public  void DeleteItem(int id)
         {
-            _httpClient.DeleteAsync(string.Format(_serviceApiUrl + DeleteUrl, id))
-                .Result.EnsureSuccessStatusCode();
+            var res =  _httpClient.DeleteAsync(string.Format(_serviceApiUrl + DeleteUrl, id)).Result;
+            res.EnsureSuccessStatusCode();
+
         }
     }
 }
