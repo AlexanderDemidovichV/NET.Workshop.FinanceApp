@@ -15,11 +15,11 @@
     $locationProvider.hashPrefix("");
     $locationProvider.html5Mode(true);
 
-    $urlRouterProvider.otherwise("/portfolio");
+    $urlRouterProvider.otherwise("/");
 
     $stateProvider
       .state('portfolio', {
-        url: "/portfolio",
+        url: "/",
         views: {
           '': {
             templateUrl: 'app/state.template/portfolio-table.state.template.html'

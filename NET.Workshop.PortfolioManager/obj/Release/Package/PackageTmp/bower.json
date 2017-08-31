@@ -1,0 +1,31 @@
+{
+  "name": "NET.Workshop.PortfolioManager",
+  "homepage": "https://github.com/AlexanderDemidovichV/NET.Workshop.FinanceApp",
+  "authors": [
+    "Alexander Demidovich <alexander.demidovich.v@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "angular": "^1.6.5",
+    "bootstrap": "^3.3.7",
+    "angular-resource": "latest",
+    "angular-block-ui": "latest",
+    "api-check": "^7.5.5",
+    "angular-formly": "^8.4.1",
+    "angular-formly-templates-bootstrap": "^6.3.2",
+    "angular-ui-router": "latest",
+    "async": "^2.5.0",
+    "moment": "^2.18.1",
+    "ng-lodash": "^0.5.0"
+  }
+}

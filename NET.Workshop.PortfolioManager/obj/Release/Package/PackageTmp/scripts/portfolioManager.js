@@ -4,7 +4,7 @@
     // @parentSelector: selector to append a row to.
     // @obj: portfolio item object to append.
     var appendRow = function(parentSelector, obj) {
-        var tr = $("<tr data-id='" + obj.ItemId + "'></tr>");
+        var tr = $("<tr data-id='" + obj.LocalItemId + "'></tr>");
         tr.append("<td class='name' >" + obj.Symbol + "</td>");
         tr.append("<td class='name' >" + obj.SharesNumber + "</td>");
         tr.append("<td><input type='button' class='update-button' value='Update' /><input type='button' class='delete-button' value='Delete' /></td>");

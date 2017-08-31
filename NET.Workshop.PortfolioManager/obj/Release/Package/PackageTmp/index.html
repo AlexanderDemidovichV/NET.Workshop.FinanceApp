@@ -1,28 +1,73 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" ng-app="PortfolioManagerApp">
 <head>
+    <base href="/">
     <title>Portfolio Manager</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="Styles/site.css">
-    <script src="Scripts/jquery-3.1.0.js" language="javascript"></script>
-    <script src="Scripts/portfolioManager.js" language="javascript"></script>
+
+    <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="app/bower_components/angular-block-ui/dist/angular-block-ui.min.css"/>
+    <link rel="stylesheet" href="app/Styles/footer.css" />
+    <link rel="stylesheet" href="app/Styles/header.css" />
+    <link rel="stylesheet" href="app/Styles/content.css" />
+
+    
 </head>
-<body>
-    <table id="items">
-        <thead>
-            <tr>
-                <th>Symbol</th>
-                <th>Number of shares</th>
-                <th>Actions</th>
-            </tr>
-            <!-- The row for creating new items. -->
-            <tr id="new">
-                <td><input type='text' id="symbol" /></td>
-                <td><input type='text' id="sharesNumber" /></td>
-                <td><input type='button' id="newCreate" value='Create' /></td>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+
+
+
+<body block-ui="mainBlock" >
+
+    <header class="header navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse header-navbar-collapse" id="navbar-collapse-header">
+
+
+
+            </div><!-- /.navbar-collapse -->
+
+        </div><!-- /.container -->
+    </header>
+
+
+    <div class="content" ui-view=""></div>
+    
+
+
+    <script src="app/bower_components/api-check/dist/api-check.js" ></script>
+    <script src="app/bower_components/angular/angular.js" ></script>
+    <script src="app/bower_components/angular-formly/dist/formly.js" ></script>
+    <script src="app/bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js" ></script>
+    <script src="app/bower_components/angular-resource/angular-resource.js" ></script>
+    <script src="app/bower_components/angular-block-ui/dist/angular-block-ui.js" ></script>
+    <script src="app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js" ></script>
+    <script src="app/bower_components/ng-lodash/build/ng-lodash.js" ></script>
+    <script src="app/bower_components/angular-ui-router/release/angular-ui-router.js" ></script>
+    <script src="app/bower_components/async/dist/async.js" ></script>
+    <script src="app/bower_components/moment/min/moment.min.js" ></script>
+
+    <script src="app/app.module.js"></script>
+    <script src="app/app.config.js"></script>
+    <script src="app/app.constant.js"></script>
+    <script src="app/portfolio-table/portfolio-table.component.js"></script>
+    <script src="app/document-form/document-form.component.js"></script>
+    <script src="app/services/portfolio.service.js"></script>
+    <script src="app/services/block.service.js"></script>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="col-lg-12" align="center">
+                <p class="footer_copyright">Copyright: <span>Qoert</span></p>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

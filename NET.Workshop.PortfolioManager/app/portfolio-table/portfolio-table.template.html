@@ -14,13 +14,13 @@
         </tr>
 				-->
 
-        <document-form></document-form>
+        <document-form on-add-update="vmPortfolioTable.getDocuments()"></document-form>
 
         <tr ng-repeat="item in vmPortfolioTable.documents">
 					<td>{{item.Symbol}}</td>
 					<td>{{item.SharesNumber}}</td>
 					<td>
-						<button ng-click="">Update</button>
+						<button ng-click="vmPortfolioTable.openEditForm()">Update</button>
 					</td>
 					<td>
 						<button ng-click="vmPortfolioTable.deleteDocument(item)">Delete</button>
