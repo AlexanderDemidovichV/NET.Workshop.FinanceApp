@@ -4,6 +4,9 @@
     angular
         .module('PortfolioManagerApp')
         .component('documentForm', {
+            bindings: {
+                onAddUpdate: '&'
+            },
             templateUrl: 'app/document-form/document-form.template.html',
             controller: DocumentFormController,
             controllerAs: 'vmDocumentForm'
@@ -45,7 +48,9 @@
       }
 
       function onSubmit() {
-        PortfolioService.post(vm.model);
+          PortfolioService.post(vm.model, function () {
+              vm.onAddUpdate();
+          });
       }
     }
 })();

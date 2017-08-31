@@ -1,31 +1,28 @@
-<table id="items">
-    <thead>
-        <tr>
-            <th>Symbol</th>
-            <th>Number of shares</th>
-            <th>Actions</th>
-        </tr>
-        
-        <!-- The row for creating new items. 
-        <tr id="new">
-            <td><input type='text' id="symbol" /></td>
-            <td><input type='text' id="sharesNumber" /></td>
-            <td><input type='button' id="newCreate" value='Create' /></td>
-        </tr>
-				-->
+<div class="container">
+    <table id="items" class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Symbol</th>
+                <th>Number of shares</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <document-form on-add-update="vmPortfolioTable.getDocuments()"></document-form>
+            <tr ng-repeat="item in vmPortfolioTable.documents">
+                <td>{{item.Symbol}}</td>
+                <td>{{item.SharesNumber}}</td>
+                <td>
 
-        <document-form></document-form>
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <a class="btn btn-warning" ng-click="vmPortfolioTable.openEditForm()"><i class="icon-align-left glyphicon glyphicon-pencil"></i></a>
+                            <a class="btn btn-danger" ng-click="vmPortfolioTable.deleteDocument(item)"><i class="icon-align-center glyphicon glyphicon-remove"></i></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-        <tr ng-repeat="item in vmPortfolioTable.documents">
-					<td>{{item.Symbol}}</td>
-					<td>{{item.SharesNumber}}</td>
-					<td>
-						<button ng-click="">Update</button>
-					</td>
-					<td>
-						<button ng-click="vmPortfolioTable.deleteDocument(item)">Delete</button>
-					</td>
-				</tr>
-    </thead>
-    <tbody></tbody>
-</table>
