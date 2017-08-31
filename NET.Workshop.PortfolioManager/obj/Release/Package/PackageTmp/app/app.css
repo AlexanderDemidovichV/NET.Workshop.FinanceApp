@@ -1,0 +1,104 @@
+.row{
+    margin-top:40px;
+    padding: 0 10px;
+}
+
+.clickable{
+    cursor: pointer;   
+}
+
+.panel-heading span {
+  margin-top: -20px;
+  font-size: 15px;
+}
+
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    border: none;
+    text-align: left;
+    padding: 8px;
+}
+
+body {
+  padding: 20px;
+}
+
+h1 {
+  border-bottom: 1px solid gray;
+}
+
+.contacts {
+  list-style: none;
+}
+
+.contacts li {
+  clear: both;
+  height: 40px;
+  padding-top: 15px;
+}
+
+.thumb {
+  float: left;
+  height: 10px;
+  margin: -0.5em 1em 1.5em 0;
+  padding-bottom: 1em;
+  width: 100px;
+}
+
+.contact {
+  background-color: white;
+  border: 1px solid black;
+  float: left;
+  height: 400px;
+  margin-bottom: 2em;
+  margin-right: 3em;
+  padding: 2em;
+  width: 400px;
+}
+
+.contact-thumbs {
+  list-style: none;
+  margin: 0;
+}
+
+.contact-thumbs img {
+  height: 100px;
+  padding: 1em;
+  width: 100px;
+}
+
+.contact-thumbs li {
+  background-color: white;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 1em;
+}
+
+.specs {
+  clear: both;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.specs dt {
+  font-weight: bold;
+}
+
+.specs > li {
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+}
+
+.specs > li > span {
+  font-size: 1.2em;
+  font-weight: bold;
+}

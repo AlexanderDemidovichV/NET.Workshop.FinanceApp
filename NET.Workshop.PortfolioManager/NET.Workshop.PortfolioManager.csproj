@@ -678,6 +678,8 @@
     <Content Include="app\bower_components\ng-lodash\License.txt" />
     <Content Include="app\document-form\document-form.component.js" />
     <Content Include="app\document-form\document-form.template.html" />
+    <Content Include="app\portfolio-table\edit-modal.controller.js" />
+    <Content Include="app\portfolio-table\edit-modal.template.html" />
     <Content Include="app\portfolio-table\portfolio-table.component.js" />
     <Content Include="app\portfolio-table\portfolio-table.template.html" />
     <Content Include="app\services\block.service.js" />

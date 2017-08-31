@@ -1,0 +1,12 @@
+﻿.header {
+    position: absolute;
+    background-color: #f5f5f5;
+}
+
+    .header .header-navbar-collapse {
+        max-height: 100vh;
+    }
+
+    
+
+

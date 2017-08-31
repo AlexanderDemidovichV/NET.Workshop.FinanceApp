@@ -9,15 +9,17 @@
             controllerAs: 'vmPortfolioTable'
         });
 
-    PortfolioTableController.$inject = ['PortfolioService'];
+    PortfolioTableController.$inject = ['PortfolioService', '$uibModal'];
 
-    function PortfolioTableController(PortfolioService) {
+    function PortfolioTableController(PortfolioService, $uibModal) {
         var vm = this;
 
         vm.documents = [];
 
         vm.deleteDocument = deleteDocument;
         vm.updateDocument = updateDocument;
+        vm.getDocuments = getDocuments;
+        vm.openEditForm = openEditForm;
 
         activate();
 
@@ -32,13 +34,20 @@
         }
 
         function updateDocument(item) {
-            PortfolioService.update({Id: item.Id}, item);
+            PortfolioService.update({ Id: item.LocalItemId}, item);
         };
 
         function deleteDocument(item){
-            PortfolioService.delete({Id: item.LocalItemId});
-
+            PortfolioService.delete({ Id: item.LocalItemId }, function () {
+                getDocuments();
+            });
         }
 
+        function openEditForm() {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/portfolio-table/edit-modal.template.html',
+                controller: 'editModal'
+            });
+        }
     }
 })();

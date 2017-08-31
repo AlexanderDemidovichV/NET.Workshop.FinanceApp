@@ -1,0 +1,31 @@
+<table id="items">
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Number of shares</th>
+            <th>Actions</th>
+        </tr>
+        
+        <!-- The row for creating new items. 
+        <tr id="new">
+            <td><input type='text' id="symbol" /></td>
+            <td><input type='text' id="sharesNumber" /></td>
+            <td><input type='button' id="newCreate" value='Create' /></td>
+        </tr>
+				-->
+
+        <document-form></document-form>
+
+        <tr ng-repeat="item in vmPortfolioTable.documents">
+					<td>{{item.Symbol}}</td>
+					<td>{{item.SharesNumber}}</td>
+					<td>
+						<button ng-click="">Update</button>
+					</td>
+					<td>
+						<button ng-click="vmPortfolioTable.deleteDocument(item)">Delete</button>
+					</td>
+				</tr>
+    </thead>
+    <tbody></tbody>
+</table>

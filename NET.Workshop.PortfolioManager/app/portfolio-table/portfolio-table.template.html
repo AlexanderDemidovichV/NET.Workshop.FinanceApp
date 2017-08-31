@@ -8,19 +8,15 @@
             </tr>
         </thead>
         <tbody>
-            <document-form></document-form>
+            <document-form on-add-update="vmPortfolioTable.getDocuments()"></document-form>
             <tr ng-repeat="item in vmPortfolioTable.documents">
                 <td>{{item.Symbol}}</td>
                 <td>{{item.SharesNumber}}</td>
                 <td>
-                    <!--<div class="btn-group">
-                        <button class="btn btn-warning" ng-click="">Update</button>
-                        <button class="btn btn-danger" ng-click="vmPortfolioTable.deleteDocument(item)">Delete</button>
-                    </div>-->
 
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <a class="btn btn-warning" ng-click=""><i class="icon-align-left glyphicon glyphicon-pencil"></i></a>
+                            <a class="btn btn-warning" ng-click="vmPortfolioTable.openEditForm()"><i class="icon-align-left glyphicon glyphicon-pencil"></i></a>
                             <a class="btn btn-danger" ng-click="vmPortfolioTable.deleteDocument(item)"><i class="icon-align-center glyphicon glyphicon-remove"></i></a>
                         </div>
                     </div>
@@ -29,3 +25,4 @@
         </tbody>
     </table>
 </div>
+
