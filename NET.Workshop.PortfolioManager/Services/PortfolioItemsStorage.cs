@@ -7,6 +7,7 @@ using System.Web;
 using static NET.Workshop.PortfolioManager.Models.PortfolioItemViewModel;
 using NET.Workshop.PortfolioManager.Infrastructure;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace NET.Workshop.PortfolioManager.Services
 {
@@ -32,7 +33,7 @@ namespace NET.Workshop.PortfolioManager.Services
 
         public void UpdateUserPortfolio(int userId)
         {
-            var itemsList =  _portfolioItemsService.GetItems(userId);
+            var itemsList = _portfolioItemsService.GetItems(userId);
             _instance.Value.portfolioItems.AddRange(itemsList.Select(i => i.ToStoragePortfolioItem()));
         }
 
@@ -73,7 +74,7 @@ namespace NET.Workshop.PortfolioManager.Services
 
         }
 
-        public void Synchronize()
+        public async void Synchronize()
         {
             var users = UserStorage.Instance.GetUsers();
 
@@ -83,29 +84,54 @@ namespace NET.Workshop.PortfolioManager.Services
                 portfolioItems.RemoveAll(i => i.Status == PortfolioItemStatus.Delete);
                 portfolioItems.Select(i => i.Status = PortfolioItemStatus.None);
 
-                    foreach (var item in bufferList)
+                foreach (var item in bufferList)
+                {
+                    switch (item.Status)
                     {
-                        switch (item.Status)
-                        {
-                            case PortfolioItemStatus.Add:
-                                _portfolioItemsService.CreateItem(item.ToModelPortfolioItem());
+                        case PortfolioItemStatus.Add:
+                            if(await _portfolioItemsService.CreateItem(item.ToModelPortfolioItem()))
                                 item.Status = PortfolioItemStatus.None;
-                                break;
-                            case PortfolioItemStatus.Update:
-                                _portfolioItemsService.UpdateItem(item.ToModelPortfolioItem());
+                            break;
+                        case PortfolioItemStatus.Update:
+                            if(await _portfolioItemsService.UpdateItem(item.ToModelPortfolioItem()))
                                 item.Status = PortfolioItemStatus.None;
-                                break;
-                            case PortfolioItemStatus.Delete:
-                                if (item.ItemId == 0)
-                                    break;
-                                _portfolioItemsService.DeleteItem(item.ItemId);
-                                break;
-                        }
+                            break;
+                        case PortfolioItemStatus.Delete:
+                            if (item.ItemId == 0)
+                                item.Status = PortfolioItemStatus.None;
+                            else
+                                if (await _portfolioItemsService.DeleteItem(item.ToModelPortfolioItem().ItemId))
+                                    item.Status = PortfolioItemStatus.None;
+
+                            break;
                     }
-                
+                }
+                bufferList.RemoveAll(i => i.Status == PortfolioItemStatus.None);
+                portfolioItems.AddRange(bufferList.Except(portfolioItems, new PortfolioItemsComparer()));
                
             }
         }
 
+    }
+
+    class PortfolioItemsComparer : IEqualityComparer<PortfolioItemViewModel>
+    {
+        public bool Equals(PortfolioItemViewModel b1, PortfolioItemViewModel b2)
+        {
+            if (b2 == null && b1 == null)
+                return true;
+            else if (b1 == null | b2 == null)
+                return false;
+            else if (b1.LocalItemId == b2.LocalItemId)
+                return true;
+            else
+                return false;
+        }
+
+        public int GetHashCode(PortfolioItemViewModel bx)
+        {
+            int hCode = bx.LocalItemId.GetHashCode();
+            return hCode;
+        }
     }
 }

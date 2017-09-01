@@ -56,7 +56,7 @@ namespace NET.Workshop.PortfolioManager.Services
         /// </summary>
         /// <param name="userId">The User Id.</param>
         /// <returns>The list of portfolio items.</returns>
-        public List<PortfolioItemModel> GetItems(int userId)
+        public  List<PortfolioItemModel> GetItems(int userId)
         {
             var dataAsString =  _httpClient.GetStringAsync(string.Format(_serviceApiUrl + GetUrl, userId)).Result;
             return JsonConvert.DeserializeObject<List<PortfolioItemModel>>(dataAsString);
@@ -66,30 +66,30 @@ namespace NET.Workshop.PortfolioManager.Services
         /// Creates a portfolio item. UserId is taken from the model.
         /// </summary>
         /// <param name="item">The portfolio item to create.</param>
-        public void CreateItem(PortfolioItemModel item)
+        public async Task<bool> CreateItem(PortfolioItemModel item)
         {
-            var res =  _httpClient.PostAsJsonAsync(_serviceApiUrl + CreateUrl, item).Result;
-            res.EnsureSuccessStatusCode();
+            var res = await _httpClient.PostAsJsonAsync(_serviceApiUrl + CreateUrl, item);
+            return res.IsSuccessStatusCode;
         }
 
         /// <summary>
         /// Updates a portfolio item.
         /// </summary>
         /// <param name="item">The portfolio item to update.</param>
-        public void UpdateItem(PortfolioItemModel item)
+        public async Task<bool> UpdateItem(PortfolioItemModel item)
         {
-            var res =  _httpClient.PutAsJsonAsync(_serviceApiUrl + UpdateUrl, item).Result;
-            res.EnsureSuccessStatusCode();
+            var res = await _httpClient.PutAsJsonAsync(_serviceApiUrl + UpdateUrl, item);
+            return res.IsSuccessStatusCode;
         }
 
         /// <summary>
         /// Deletes a portfolio item.
         /// </summary>
         /// <param name="id">The portfolio item Id to delete.</param>
-        public  void DeleteItem(int id)
+        public async Task<bool> DeleteItem(int id)
         {
-            var res =  _httpClient.DeleteAsync(string.Format(_serviceApiUrl + DeleteUrl, id)).Result;
-            res.EnsureSuccessStatusCode();
+            var res = await  _httpClient.DeleteAsync(string.Format(_serviceApiUrl + DeleteUrl, id));
+            return res.IsSuccessStatusCode;
 
         }
     }

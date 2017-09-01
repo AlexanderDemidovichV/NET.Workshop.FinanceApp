@@ -89,6 +89,6 @@ D:\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\System.Web.Http.Web
 D:\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\ru\System.Net.Http.Formatting.resources.dll
 D:\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\ru\System.Web.Http.resources.dll
 D:\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\bin\ru\System.Web.Http.WebHost.resources.dll
-D:\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\obj\Debug\NET.Workshop.PortfolioManager.csprojResolveAssemblyReference.cache
 D:\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\obj\Debug\NET.Workshop.PortfolioManager.dll
 D:\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\obj\Debug\NET.Workshop.PortfolioManager.pdb
+D:\NET.Workshop.FinanceApp\NET.Workshop.PortfolioManager\obj\Debug\NET.Workshop.PortfolioManager.csprojResolveAssemblyReference.cache

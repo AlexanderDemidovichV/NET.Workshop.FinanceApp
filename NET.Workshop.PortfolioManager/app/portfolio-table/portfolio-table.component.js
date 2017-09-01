@@ -12,10 +12,10 @@
     PortfolioTableController.$inject = ['PortfolioService', '$uibModal'];
 
     function PortfolioTableController(PortfolioService, $uibModal) {
+
         var vm = this;
-
         vm.documents = [];
-
+        vm.selected = {};
         vm.deleteDocument = deleteDocument;
         vm.updateDocument = updateDocument;
         vm.getDocuments = getDocuments;
@@ -43,10 +43,20 @@
             });
         }
 
-        function openEditForm() {
+        function openEditForm(item) {
             var modalInstance = $uibModal.open({
                 templateUrl: 'app/portfolio-table/edit-modal.template.html',
-                controller: 'editModal'
+                controller: 'editModal',
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
+                }
+            });
+            modalInstance.result.then(function (selectedItem) {
+                vm.selected = selectedItem;
+            }, function () {
+                
             });
         }
     }

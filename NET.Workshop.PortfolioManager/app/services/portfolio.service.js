@@ -7,7 +7,7 @@
 
     portfolioService.$inject = ['$resource'];
 
-    function portfolioService($resource) {
+    function portfolioService($resource, PORTFOLIO_MANAGER_URL) {
         var service = $resource('http://localhost:7677/api/portfolioitems/:Id', {}, {
             query: {
 				method: 'GET',
